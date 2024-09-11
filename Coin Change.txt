@@ -1,0 +1,36 @@
+var coinChange=function (coins, amount) {
+    coins = coins.sort((a, b) => b - a);
+
+    let cases = [];
+    for (let i = 0; i < coins.length; i++) {
+        let seq = coins.slice(i);
+        let current_amount = 0;
+        let count = 0;
+
+        for (let item of seq) {
+            while (true) {
+                if (current_amount + item === amount) {
+                    count += 1;
+                    current_amount += item;
+                    break;
+                } else if (current_amount + item > amount) {
+                    break;
+                } else if (current_amount < amount) {
+                    count += 1;
+                    current_amount += item;   
+                }
+                if (current_amount === amount) {
+                    break;    }  
+            }
+            if (current_amount === amount) {
+                break;  }
+        }
+        if (current_amount === amount) {
+            cases.push(count);}   
+    }
+    if (cases.length > 0) {
+        return Math.min(...cases); }
+    return -1;
+}
+
+
